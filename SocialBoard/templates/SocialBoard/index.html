@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>SocialBoard</title>
+
+    
+    <link rel="stylesheet" href="{% static 'SocialBoard/css/style.css' %}" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <a href="/logout/">logout</a>
+        <h1 class="app-name">SocialBoard</h1>
+        {% if latest_posts %}
+        <div class="post-container">
+            {% for post in latest_posts %}
+            <h5>{{ post.post_publish_date }}</h5>
+            <h2>{{ post.post_title }}</h2>
+            <h3>{{ post.post_content }}</h3>
+            <h6>{{ post.post_author }}</h6>
+            {% endfor %}
+        </div>
+        {% else %}
+        <span class="no-posts">No messages...</span>
+        <span class="no-posts">Click the '+' button to add a new message</span>
+        {% endif %}
+
+        <div class="post-form" id="my-form">
+            <fieldset >
+                <legend>
+                    <p id="date"></p>
+                </legend>
+                <input type="text" placeholder="Title" name="title" id="title" />
+                <textarea placeholder="Your message here" name="content" id="content"></textarea>
+                <input type="text" placeholder="Author" value="{{ user.username }}" id="author"  />
+            </fieldset>
+        </div>
+
+
+        <div class="post-options" id="options">
+            <i class="fa fa-times" aria-hidden="true" id="cancel"></i>
+            <i class="fa fa-plus" aria-hidden="true" id="post"></i>
+        </div>
+        <div class="new-post" id="plus">
+            <i class="fa fa-plus" aria-hidden="true" id="newpost"></i>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="{% static 'SocialBoard/js/script.js' %}"></script>
+</body>
+
+</html>

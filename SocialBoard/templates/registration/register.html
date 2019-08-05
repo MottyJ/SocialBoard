@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>SocialBoard Login</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'SocialBoard/css/register.css' %}" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <form class="register" method="POST" action="/register/">
+            {% csrf_token %}
+            <h1 class="app-name">SocialBoard</h1>
+            <input type="text" placeholder="username" name="username">
+            <input type="password" placeholder="password" name="password1">
+            <input type="password" placeholder="password confirmation" name="password2">
+            <input type="submit" value="CREATE" id="register">
+            <input type="hidden" name="next" value="{{ next }}" />
+            {% if form.errors %}
+                <h6>Passwords don't match. Please try again.</h6>
+            {% endif %}
+            <h6 id="light">Already registered? <a href="/login/" class="no-dec">Sign in</a></h6>
+        </form>
+    </div>
+
+</body>
+
+</html>
